@@ -1,0 +1,506 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaibhav Rai - Personal Portfolio</title>
+    <style>
+        :root {
+            --bg: #f4f7fb;
+            --surface: #ffffff;
+            --text: #172033;
+            --muted: #64748b;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #7c3aed;
+            --border: #dde4ef;
+            --shadow: 0 14px 35px rgba(30, 41, 59, 0.10);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.10), transparent 24rem),
+                radial-gradient(circle at 90% 30%, rgba(124, 58, 237, 0.08), transparent 22rem),
+                var(--bg);
+            line-height: 1.6;
+        }
+
+        .skip-link {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 100;
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: #fff;
+            background: var(--primary);
+            transform: translateY(-150%);
+            transition: transform 0.2s ease;
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 72px;
+            padding: 10px max(24px, calc((100% - 1100px) / 2));
+            border-bottom: 1px solid rgba(221, 228, 239, 0.85);
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(14px);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            letter-spacing: 0.08em;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        nav a {
+            display: block;
+            padding: 8px 12px;
+            border-radius: 999px;
+            color: var(--text);
+            font-weight: 650;
+            text-decoration: none;
+            transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+        }
+
+        nav a:hover,
+        nav a:focus-visible {
+            color: var(--primary);
+            background: #edf4ff;
+            transform: translateY(-2px);
+        }
+
+        main {
+            width: min(1100px, calc(100% - 32px));
+            margin: 30px auto;
+        }
+
+        section {
+            margin-bottom: 24px;
+            padding: clamp(24px, 5vw, 44px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: var(--shadow);
+            scroll-margin-top: 90px;
+        }
+
+        section h2 {
+            position: relative;
+            margin: 0 0 18px;
+            font-size: clamp(1.45rem, 4vw, 2.15rem);
+        }
+
+        section h2::after {
+            content: "";
+            display: block;
+            width: 54px;
+            height: 4px;
+            margin-top: 7px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        #hero {
+            overflow: hidden;
+            min-height: 280px;
+            display: grid;
+            align-content: center;
+            color: #fff;
+            border: 0;
+            background:
+                linear-gradient(120deg, rgba(37, 99, 235, 0.94), rgba(124, 58, 237, 0.88)),
+                var(--primary);
+        }
+
+        #hero h2 {
+            max-width: 700px;
+            font-size: clamp(2.2rem, 7vw, 4.5rem);
+            line-height: 1.05;
+        }
+
+        #hero h2::after {
+            background: #fff;
+        }
+
+        #hero p {
+            max-width: 650px;
+            margin: 5px 0 0;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+
+        #about {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            column-gap: 32px;
+            align-items: center;
+        }
+
+        #about h2 {
+            grid-column: 1 / -1;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border: 6px solid #fff;
+            border-radius: 50%;
+            box-shadow: 0 12px 28px rgba(37, 99, 235, 0.22);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.035) rotate(2deg);
+            box-shadow: 0 18px 36px rgba(37, 99, 235, 0.28);
+        }
+
+        #about p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 1.08rem;
+        }
+
+        #projects ul {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #projects li {
+            min-height: 130px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #f9fbff;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        #projects li:hover {
+            transform: translateY(-6px);
+            border-color: #aac1f5;
+            box-shadow: 0 12px 24px rgba(37, 99, 235, 0.12);
+        }
+
+        #projects strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--primary-dark);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        th,
+        td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: #fff;
+            background: var(--primary);
+        }
+
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: #eef5ff;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        form {
+            display: grid;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 7px;
+        }
+
+        label {
+            font-weight: 700;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            outline: none;
+            background: #fff;
+            font: inherit;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        input {
+            height: 48px;
+            padding: 0 14px;
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+            padding: 12px 14px;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+            transform: translateY(-1px);
+        }
+
+        button {
+            width: fit-content;
+            min-width: 130px;
+            min-height: 46px;
+            border: 0;
+            border-radius: 999px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.22);
+            cursor: pointer;
+            font: inherit;
+            font-weight: 800;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 24px rgba(37, 99, 235, 0.28);
+            filter: brightness(1.05);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        footer {
+            padding: 24px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        :focus-visible {
+            outline: 3px solid rgba(37, 99, 235, 0.32);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            section {
+                animation: reveal 0.55s ease both;
+            }
+
+            section:nth-of-type(2) { animation-delay: 0.06s; }
+            section:nth-of-type(3) { animation-delay: 0.12s; }
+            section:nth-of-type(4) { animation-delay: 0.18s; }
+            section:nth-of-type(5) { animation-delay: 0.24s; }
+
+            @keyframes reveal {
+                from {
+                    opacity: 0;
+                    transform: translateY(18px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+
+        @media (max-width: 700px) {
+            header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 4px;
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+
+            nav ul {
+                width: 100%;
+            }
+
+            nav a {
+                padding: 6px 9px;
+            }
+
+            main {
+                width: min(100% - 20px, 1100px);
+                margin-top: 14px;
+            }
+
+            section {
+                border-radius: 14px;
+            }
+
+            #about {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                text-align: center;
+            }
+
+            #about h2 {
+                grid-column: auto;
+            }
+
+            #about p {
+                margin-top: 18px;
+            }
+
+            #projects ul {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header>
+        <h1>VAIBHAV RAI</h1>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main">
+
+        <section id="hero">
+            <h2>Welcome to My Portfolio</h2>
+            <p>Hello! I am a web development student. This is my personal portfolio website.</p>
+        </section> 
+
+        <section id="about">
+            <h2>About Me</h2>
+            
+            <img src="C:\Users\sanur\Downloads\kakashi-hatake-3840x2160-26040.jpg" alt="Vaibhav Rai" class="profile-image" height="200" width="200">
+                
+            <p>I am passionate about learning web development and building creative projects. kind of good at frontend development.<br>
+            React 
+         </p>
+        </section>
+
+        <section id="projects">
+            <h2>My Projects</h2>
+            <ul>  <li>
+                    <strong>Portfolio Website:</strong> A personal one-page website to showcase your bio, skills, and contact details.
+                </li>
+                <li>
+                    <strong>Medium Clone :</strong> A simple blog layout that looks like Medium, built only with HTML and CSS.
+                </li>
+                <li>
+                    <strong>Birthday Card :</strong> A creative greeting card webpage designed with HTML structure and CSS styling.
+                </li>
+                <li>
+                    <strong>User Form:</strong> A form webpage with fields like name, email, and message for practicing form handling.
+                </li>
+            </ul>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <table>
+                                <thead>
+                    <tr>
+                        <th>Skill</th>
+                        <th>Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>HTML</td>
+                        <td>Beginner</td>
+                    </tr>
+                    <tr>
+                        <td>CSS</td>
+                        <td>Beginner</td>
+                    </tr>
+                    <tr>
+                        <td>JavaScript</td>
+                        <td>Learning</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <form action="#" method="post" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" placeholder="Enter your message" required></textarea>
+                </div>
+
+                <button type="submit">Send</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 vaibhav rai. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
